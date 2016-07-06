@@ -1,5 +1,7 @@
 class Statement
 
+  HEADERS = "date || credit || debit || balance\n"
+
   attr_reader :statement
 
   def initialize
@@ -7,7 +9,7 @@ class Statement
   end
 
   def print_statement
-    @statement
+    @statement.inject(HEADERS, :+)
   end
 
 end

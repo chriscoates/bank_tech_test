@@ -10,12 +10,12 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    @statement.statement.push("#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}\n")
+    @statement.statement.unshift("#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}\n")
   end
 
   def withdrawal(amount)
       fail 'You do not have enough funds' if amount > @balance
       @balance -= amount
-      @statement.statement.push("#{Time.now.strftime("%d/%m/%Y")} || || #{amount} || #{@balance}\n")
+      @statement.statement.unshift("#{Time.now.strftime("%d/%m/%Y")} || || #{amount} || #{@balance}\n")
   end
 end
