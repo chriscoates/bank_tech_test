@@ -10,20 +10,12 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    log_transaction(amount)
+    @statement.statement.push("#{Time.now.strftime("%d/%m/%Y")} || #{amount} || || #{@balance}\n")
   end
 
   def withdrawal(amount)
       fail 'You do not have enough funds' if amount > @balance
       @balance -= amount
-      log_transaction(amount)
+      @statement.statement.push("#{Time.now.strftime("%d/%m/%Y")} || || #{amount} || #{@balance}\n")
   end
-
-  private
-
-  def log_transaction(amount)
-    @statement.statement.push({date: Time.now.strftime("%d/%m/%Y"), amount: amount, balance: @balance})
-  end
-
-
 end

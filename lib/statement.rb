@@ -6,4 +6,8 @@ class Statement
     @statement = []
   end
 
+  def print_statement
+    @statement
+  end
+
 end

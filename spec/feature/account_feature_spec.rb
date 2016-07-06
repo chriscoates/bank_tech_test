@@ -4,9 +4,12 @@ describe 'Account features' do
 
   it 'prints users transactions' do
     account = Account.new
-    date = Time.now.strftime("%d/%m/%Y")
-    account.deposit(500)
-    account.withdrawal(400)
-    expect(account.statement.statement).to include ({ date: date, amount: 400, balance: 100 })
+    deposit1 = Time.local(2012,01,10)
+    allow(Time).to receive(:now).and_return (deposit1)
+    deposit2 = Time.local(2012,01,14)
+    account.deposit(1000)
+    allow(Time).to receive(:now).and_return (deposit2)
+    account.withdrawal(500)
+    expect(account.statement.print_statement).to equal ("date || credit || debit || balance\n14/01/2012 || || 500 || 2500\n10/01/2012 || 1000 || || 500")
   end
 end
